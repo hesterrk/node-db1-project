@@ -58,7 +58,6 @@ SELECT * FROM [Suppliers] WHERE length(SupplierName) > 20
 
 
 
-
 **Clicking the `Restore Database` button in the page will repopulate the database with the original data and discard all changes you have made**.
 
 ### Write Accounts API
