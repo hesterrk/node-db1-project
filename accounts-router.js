@@ -6,18 +6,20 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
+    // const query = { limit = 10, sortby = "id", sortdir = "asc"}
+
     //accounts coming from accounts.js -> table name
-    const account = await db.select("*").from("accounts");
+
+    // const account = await db.select("*").from("accounts");
+    const account = await db
+      .select("*")
+      .from("accounts")
+      .limit(5)
+      .orderBy("id", "desc");
+
     res.json(account);
 
-    //stretch:
-    //- Add a `query string` option to your `GET /api/accounts` endpoint. The `query string` may contain `limit`, `sortby` and `sortdir` keys. If these keys are provided, use these values to limit and sort the `accounts` which are selected from the database. Reference the docs for sorting and limiting in `knex`.
-
-    // const { limit = 10, sortby = "id", sortdir = "asc"} = query 
-    // let querying = await db("accounts").orderBy(sortby, sortdir).limit(limit);
-    
-
-
+    // const { limit = 10, sortby = "id", sortdir = "asc"} = query
   } catch (error) {
     next(error);
   }
