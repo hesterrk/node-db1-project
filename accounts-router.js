@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-      //accounts coming from accounts.js
+    //accounts coming from accounts.js -> table name
     const account = await db.select("*").from("accounts");
     res.json(account);
   } catch (error) {
@@ -16,6 +16,11 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
+    const account = await db
+      .first("*")
+      .from("accounts")
+      .where("id", req.params.id);
+    res.json(account);
   } catch (error) {
     next(error);
   }
