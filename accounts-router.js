@@ -48,6 +48,18 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
+    const payload = {
+      name: req.body.name,
+      budget: req.body.budget
+    };
+
+    await db("accounts")
+      .where("id", req.params.id)
+      .update(payload);
+    const account = await db("accounts")
+      .where("id", req.params.id)
+      .first();
+    res.json(account);
   } catch (error) {
     next(error);
   }
